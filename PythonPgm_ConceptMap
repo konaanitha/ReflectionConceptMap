@@ -1,0 +1,24 @@
+import networkx as nx
+import matplotlib.pyplot as plt
+CM=nx.DiGraph()
+CM.add_nodes_from(['SDLC','Agile','UseCases','Functional \n requirements','Subclass','Superclass','Classes','Abstract or \n Concrete','Classes','Association','Object',
+                   'Activity\n Diagram','Process \n modeling','Core process','Define\n requrements','Analysis\n Phase','System','CRUD\n Technique'])
+CM.add_edges_from([('UseCases','Functional \n requirements')], label='define')
+CM.add_edges_from([('Functional \n requirements','System')], label='activities performed by')
+CM.add_edges_from([('Subclass','Superclass')], label='inherits attributes and methods of')
+CM.add_edges_from([('Define\n requrements','Analysis\n Phase')], label='is an activity done in')
+CM.add_edges_from([('Classes','Abstract or \n Concrete')], label='can be')
+CM.add_edges_from([('Object','Classes')], label='are instances of')
+CM.add_edges_from([('Activity\n Diagram','Process \n modeling')], label='is used in ')
+CM.add_edges_from([('Agile','SDLC')], label='iterative and incremental approach')
+CM.add_edges_from([('SDLC','Core process')], label='has six ')
+CM.add_edges_from([('Association','Classes')], label='show relationship between')
+CM.add_edges_from([('CRUD\n Technique','UseCases')], label=' use to validate and refines a list of')
+
+
+edgeLabels=nx.get_edge_attributes(CM,'label')
+plt.figure(1,figsize=(20,20))
+pos=nx.circular_layout(CM)
+nx.draw(CM,pos,arrows=True,node_size=6000,node_color='orange',with_labels=True,edge_color='green',font_size=12)
+nx.draw_networkx_edge_labels(CM,pos,edge_labels=edgeLabels,label_pos=0.5,font_size=10,font_color='blue')
+plt.show()
